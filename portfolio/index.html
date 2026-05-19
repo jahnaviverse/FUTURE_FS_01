@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jahnavi Yalla — Aspiring Software Developer</title>
+  <meta name="description" content="Portfolio of Jahnavi Yalla — Front-End Web Developer building clean, responsive, user-friendly websites." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#home" class="brand">
+        <span class="brand-badge">JY</span>
+        <span>Jahnavi Yalla</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">🌙</button>
+        <button id="menuToggle" class="icon-btn menu-btn" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="grid-overlay"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="container hero-inner">
+      <span class="kicker">Aspiring Software Developer</span>
+      <h1 class="hero-title">
+        Hi, I'm <span class="hero-name"><span class="dot"></span>Jahnavi</span><br />
+        <span class="text-gradient">crafting clean digital experiences.</span>
+      </h1>
+      <p class="hero-sub">
+        Front-End Web Developer · Creative Problem Solver · CSE Student at SRKR Engineering College.
+        I design and build modern, responsive, user-friendly websites that turn ideas into delightful interfaces.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">01 — About</span>
+        <h2>About Me</h2>
+        <p>A dedicated CSE student passionate about web development, problem-solving, and continuous learning.</p>
+      </div>
+      <div class="about-grid">
+        <div class="glass pad-lg">
+          <p>I'm an enthusiastic Computer Science and Engineering student with a strong interest in building modern, accessible, and beautiful interfaces. I love turning ideas into clean, functional designs that people genuinely enjoy using.</p>
+          <p>My goal is to grow as a software professional through continuous learning, innovation, and dedication — contributing meaningfully to both organizational growth and personal development.</p>
+          <div class="chips">
+            <span class="chip">Creativity</span>
+            <span class="chip">Teamwork</span>
+            <span class="chip">Innovation</span>
+            <span class="chip">Curiosity</span>
+          </div>
+        </div>
+        <div class="about-side">
+          <div class="glass pad-md"><span class="micro">Education</span><strong>B.Tech — CSE</strong><span class="meta">SRKR Engineering College</span></div>
+          <div class="glass pad-md"><span class="micro">Focus</span><strong>Front-End Development</strong><span class="meta">Responsive · UI/UX</span></div>
+          <div class="glass pad-md"><span class="micro">Goal</span><strong>Software Professional</strong><span class="meta">Learn · Build · Grow</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">02 — Skills</span>
+        <h2>Skills & Expertise</h2>
+        <p>A toolkit built around the web, fundamentals, and human collaboration.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="glass pad-md"><h3>Technical</h3><ul class="tags"><li>C</li><li>Java</li><li>Python</li><li>HTML</li><li>CSS</li><li>JavaScript</li></ul></div>
+        <div class="glass pad-md"><h3>Core Concepts</h3><ul class="tags"><li>DSA</li><li>OOP</li><li>DBMS</li></ul></div>
+        <div class="glass pad-md"><h3>Expertise Areas</h3><ul class="tags"><li>Front-End</li><li>Responsive Design</li><li>UI/UX</li><li>Problem Solving</li><li>Creativity</li><li>Teamwork</li></ul></div>
+        <div class="glass pad-md"><h3>Interpersonal</h3><ul class="tags"><li>Analytical Thinking</li><li>Communication</li><li>Collaboration</li><li>Adaptability</li><li>Continuous Learning</li></ul></div>
+      </div>
+      <div class="bars">
+        <div class="bar"><span>HTML / CSS</span><div class="track"><i style="width:92%"></i></div></div>
+        <div class="bar"><span>JavaScript</span><div class="track"><i style="width:80%"></i></div></div>
+        <div class="bar"><span>Java</span><div class="track"><i style="width:75%"></i></div></div>
+        <div class="bar"><span>Python</span><div class="track"><i style="width:70%"></i></div></div>
+        <div class="bar"><span>DSA / OOP</span><div class="track"><i style="width:78%"></i></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">03 — Services</span>
+        <h2>What I Do</h2>
+        <p>Responsive, modern, visually compelling websites that combine creativity, usability, and performance.</p>
+      </div>
+      <div class="services-grid">
+        <article class="glass pad-lg service"><div class="icon">⌘</div><h3>Front-End Development</h3><p>Hand-crafted interfaces with HTML, CSS, and JavaScript — focused on clean structure and maintainable code.</p></article>
+        <article class="glass pad-lg service"><div class="icon">▦</div><h3>Responsive Design</h3><p>Layouts that look great on desktop, tablet, and mobile — with fluid grids and modern CSS.</p></article>
+        <article class="glass pad-lg service"><div class="icon">✦</div><h3>UI/UX Interfaces</h3><p>User-centric design that balances aesthetics, hierarchy, and accessibility for memorable experiences.</p></article>
+        <article class="glass pad-lg service"><div class="icon">▤</div><h3>Modern Web Layouts</h3><p>Contemporary compositions with glassmorphism, gradients, and refined typography systems.</p></article>
+        <article class="glass pad-lg service"><div class="icon">☀</div><h3>User-Centric Experiences</h3><p>Digital products built around real human needs — clear, simple, and delightful to use.</p></article>
+        <article class="glass pad-lg service"><div class="icon">↗</div><h3>Continuous Improvement</h3><p>Always learning new tools, patterns, and trends to keep work fresh and forward-looking.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">04 — Projects</span>
+        <h2>Selected Work</h2>
+        <p>A few things I've built while learning and exploring.</p>
+      </div>
+      <div class="projects-grid">
+        <article class="project">
+          <div class="project-cover cover-1"><span>💸</span></div>
+          <div class="pad-lg">
+            <h3>Expense Tracker Website</h3>
+            <p>A responsive Expense Tracker that enables efficient monitoring and management through a clean, user-friendly interface.</p>
+            <ul class="tags"><li>Responsive Design</li><li>Expense Management</li><li>Clean UI</li><li>User-Friendly Navigation</li></ul>
+            <div class="actions"><a href="#" class="btn btn-primary">View Project</a><a href="https://github.com/jahnaviverse" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a></div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-cover cover-2"><span>📚</span></div>
+          <div class="pad-lg">
+            <h3>Smart Library Management System</h3>
+            <p>Streamlines book management, user records, and issue tracking with an intuitive dashboard for better library operations.</p>
+            <ul class="tags"><li>Book Management</li><li>User Record Tracking</li><li>Efficient Operations</li><li>Interactive Dashboard</li></ul>
+            <div class="actions"><a href="#" class="btn btn-primary">View Project</a><a href="https://github.com/jahnaviverse" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT + MESSAGE -->
+  <section id="contact" class="section contact">
+    <div class="contact-glow"></div>
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">05 — Contact</span>
+        <h2>Let's Connect</h2>
+        <p>Feel free to reach out for collaborations, opportunities, or creative projects.</p>
+      </div>
+      <div class="contact-grid">
+        <a href="mailto:jahnavinaidu.369@gmail.com" class="glass pad-lg contact-card">
+          <div class="icon">✉</div><span class="micro">Email</span><strong>jahnavinaidu.369@gmail.com</strong>
+        </a>
+        <a href="https://github.com/jahnaviverse" target="_blank" rel="noopener" class="glass pad-lg contact-card">
+          <div class="icon">⌥</div><span class="micro">GitHub</span><strong>github.com/jahnaviverse</strong>
+        </a>
+        <div class="glass pad-lg contact-card">
+          <div class="icon">◎</div><span class="micro">Open To</span><strong>Internships · Collaborations · Front-End Projects</strong>
+        </div>
+      </div>
+
+      <form id="messageForm" class="glass pad-lg message-form">
+        <h3 class="form-title">Send me a message</h3>
+        <p class="form-sub">Have an opportunity or idea? Drop a note and I'll get back to you.</p>
+        <div class="row">
+          <label><span class="micro">Name</span><input name="name" required placeholder="Your name" /></label>
+          <label><span class="micro">Email</span><input name="email" type="email" required placeholder="you@example.com" /></label>
+        </div>
+        <label><span class="micro">Message</span><textarea name="message" rows="5" required placeholder="Tell me about your project or opportunity…"></textarea></label>
+        <button type="submit" class="btn btn-primary">✉ Send Message</button>
+        <p id="formNote" class="form-note" hidden></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="foot-brand"><span class="brand-badge">JY</span><em>"Learning, Building, Growing."</em></div>
+      <nav class="foot-links">
+        <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+      </nav>
+      <div class="foot-social">
+        <a href="https://github.com/jahnaviverse" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:jahnavinaidu.369@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="container copy">© <span id="year"></span> Jahnavi Yalla. All rights reserved.</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
