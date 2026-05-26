@@ -27,7 +27,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 // ===== Message form → POST to backend /contact =====
 // Change this if your backend runs somewhere else (e.g. deployed URL)
-const API_URL = "http://localhost:5000/contact";
+const API_URL = "http://future-fs-01-wuwa.onrender.com/contact";
 
 const form = document.getElementById("messageForm");
 const note = document.getElementById("formNote");

@@ -24,7 +24,7 @@ console.log('RECEIVER:', process.env.EMAIL_USER);
 const app = express();
 
 // ---- Middleware ----
-app.use(cors());                       // allow requests from your frontend
+app.use(cors({origin: "*"}));                       // allow requests from your frontend
 app.use(express.json());               // parse JSON bodies sent by fetch()
 
 // ---- Health check (optional) ----
