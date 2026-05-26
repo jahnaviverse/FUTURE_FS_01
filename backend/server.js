@@ -17,9 +17,9 @@ const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 require("dotenv").config(); // loads .env into process.env
-console.log('EMAIL:', process.env.jahnavinaidu.369@gmail.com);
-console.log('PASSWORD:', process.env.sfugznbzddbwyzch);
-console.log('RECEIVER:', process.env.jahnavinaidu.369@gmail.com);
+console.log('EMAIL:', process.env.EMAIL_USER);
+console.log('PASSWORD:', process.env.EMAIL_PASS);
+console.log('RECEIVER:', process.env.EMAIL_USER);
 
 const app = express();
 
