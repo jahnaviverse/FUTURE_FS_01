@@ -1,86 +1,68 @@
-/**
- * server.js — tiny Node + Express backend for the portfolio contact form.
- *
- * What this file does:
- *   1. Starts an Express web server on a port (default 5000).
- *   2. Accepts POST requests at /contact with { name, email, message }.
- *   3. Uses Nodemailer + your Gmail App Password to email you the message.
- *
- * Why each piece exists:
- *   - express        → web framework, makes it easy to define routes (URLs).
- *   - cors           → lets your frontend (different port / file) call this API.
- *   - dotenv         → loads secrets from a .env file into process.env.
- *   - nodemailer     → sends real emails via SMTP (here, Gmail).
- */
-
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-require("dotenv").config(); // loads .env into process.env
-console.log('EMAIL:', process.env.EMAIL_USER);
-console.log('PASSWORD:', process.env.EMAIL_PASS);
-console.log('RECEIVER:', process.env.EMAIL_USER);
 
 const app = express();
 
-// ---- Middleware ----
-app.use(cors());                       // allow requests from your frontend
-app.use(express.json());               // parse JSON bodies sent by fetch()
+app.use(cors());
+app.use(express.json());
 
-// ---- Health check (optional) ----
 app.get("/", (req, res) => {
-  res.send("Portfolio backend is running ✅");
+  res.send("Backend running successfully");
 });
 
-// ---- Contact route ----
-// Frontend calls:  fetch("http://localhost:5000/contact", { method: "POST", ... })
-app.post("/contact", async (req, res) => {
-  try {
-    const { name, email, message } = req.body || {};
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "jahnavinaidu.369@gmail.com",
+    pass: "sfugznbzddbwyzch",
+  },
+});
 
-    // 1. Validate input
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: "All fields are required." });
-    }
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!emailOk) {
-      return res.status(400).json({ error: "Invalid email address." });
-    }
-
-    // 2. Create a transporter using your Gmail + App Password
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "jahnavinaidu.369@gmail.com", // your Gmail address
-        pass: "sfugznbzddbwyzch", // your 16-char App Password (NOT your normal password)
-      }
-    });
-
-    // 3. Send the email to yourself
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER, // where you receive it
-      replyTo: email,                                     // hitting "Reply" mails the sender
-      subject: `Portfolio inquiry from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-      html: `
-        <h2>New portfolio message</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Message:</b></p>
-        <p style="white-space:pre-line">${message}</p>
-      `,
-    });
-
-    return res.json({ success: true, message: "Message sent successfully!" });
-  } catch (err) {
-    console.error("Email error:", err);
-    return res.status(500).json({ error: "Failed to send message." });
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("Transporter Error:", error);
+  } else {
+    console.log("Server is ready to send emails");
   }
 });
 
-// ---- Start the server ----
-const PORT = 5000
+app.post("/contact", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    await transporter.sendMail({
+      from: "jahnavinaidu.369@gmail.com",
+      to: "jahnavinaidu.369@gmail.com",
+      subject: "New Portfolio Contact Message",
+      html: `
+        <h2>New Contact Message</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Message sent successfully",
+    });
+
+  } catch (error) {
+    console.log("MAIL ERROR:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to send email",
+    });
+  }
+});
+
+const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
