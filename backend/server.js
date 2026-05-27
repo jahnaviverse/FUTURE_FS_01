@@ -12,75 +12,93 @@
  *   - dotenv         → loads secrets from a .env file into process.env.
  *   - nodemailer     → sends real emails via SMTP (here, Gmail).
  */
-
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
-require("dotenv").config(); // loads .env into process.env
-console.log('EMAIL:', process.env.EMAIL_USER);
-console.log('PASSWORD:', process.env.EMAIL_PASS);
-console.log('RECEIVER:', process.env.EMAIL_USER);
+require("dotenv").config();
 
 const app = express();
 
-// ---- Middleware ----
-app.use(cors({origin: "*"}));                       // allow requests from your frontend
-app.use(express.json());               // parse JSON bodies sent by fetch()
+// Middleware
+app.use(cors({ origin: "*" }));
+app.use(express.json());
 
-// ---- Health check (optional) ----
+// Test route
 app.get("/", (req, res) => {
   res.send("Portfolio backend is running ✅");
 });
 
-// ---- Contact route ----
-// Frontend calls:  fetch("http://localhost:5000/contact", { method: "POST", ... })
-app.post("/contact", async (req, res) => {
-  try {
-    const { name, email, message } = req.body || {};
+// Create transporter ONCE
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 
-    // 1. Validate input
-    if (!name || !email || !message) {
-      return res.status(400).json({ error: "All fields are required." });
-    }
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!emailOk) {
-      return res.status(400).json({ error: "Invalid email address." });
-    }
-
-    // 2. Create a transporter using your Gmail + App Password
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "jahnavinaidu.369@gmail.com", // your Gmail address
-        pass: "sfugznbzddbwyzch", // your 16-char App Password (NOT your normal password)
-      }
-    });
-
-    // 3. Send the email to yourself
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_TO || process.env.EMAIL_USER, // where you receive it
-      replyTo: email,                                     // hitting "Reply" mails the sender
-      subject: `Portfolio inquiry from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-      html: `
-        <h2>New portfolio message</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Message:</b></p>
-        <p style="white-space:pre-line">${message}</p>
-      `,
-    });
-
-    return res.json({ success: true, message: "Message sent successfully!" });
-  } catch (err) {
-    console.error("Email error:", err);
-    return res.status(500).json({ error: "Failed to send message." });
+// Verify transporter
+transporter.verify((error, success) => {
+  if (error) {
+    console.log("Transporter Error:", error);
+  } else {
+    console.log("Email server is ready ✅");
   }
 });
 
-// ---- Start the server ----
-const PORT = 5000
+// Contact route
+app.post("/contact", async (req, res) => {
+  try {
+    const { name, email, message } = req.body;
+
+    // Validation
+    if (!name || !email || !message) {
+      return res.status(400).json({
+        error: "All fields are required.",
+      });
+    }
+
+    // Send mail
+    const info = await transporter.sendMail({
+      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+      to: process.env.EMAIL_TO,
+      replyTo: email,
+      subject: `Portfolio inquiry from ${name}`,
+      text: `
+Name: ${name}
+Email: ${email}
+
+Message:
+${message}
+      `,
+      html: `
+        <h2>New Portfolio Message</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
+        <p>${message}</p>
+      `,
+    });
+
+    console.log("Email sent:", info.response);
+
+    res.status(200).json({
+      success: true,
+      message: "Message sent successfully!",
+    });
+
+  } catch (err) {
+    console.error("FULL EMAIL ERROR:", err);
+
+    res.status(500).json({
+      error: err.message,
+    });
+  }
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
