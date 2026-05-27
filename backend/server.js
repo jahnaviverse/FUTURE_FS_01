@@ -80,7 +80,7 @@ app.post("/contact", async (req, res) => {
 });
 
 // ---- Start the server ----
-const PORT = "https://future-fs-01-6pvr.vercel.app"
+const PORT = 5000
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
