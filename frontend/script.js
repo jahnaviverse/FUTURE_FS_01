@@ -67,10 +67,13 @@ if (yearEl) {
 }
 
 // =========================
+// EmailJS Init
+// =========================
+emailjs.init("2apjy3_qFTV8xN557");
+
+// =========================
 // Contact Form
 // =========================
-const API_URL = "https://future-fs-01-wuwa.onrender.com/contact";
-
 const form = document.getElementById("messageForm");
 const note = document.getElementById("formNote");
 
@@ -117,23 +120,16 @@ if (form && note) {
     showNote("Sending...", "info");
 
     try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-        }),
-      });
 
-      const result = await res.json();
-
-      if (!res.ok) {
-        throw new Error(result.message || "Request failed");
-      }
+      await emailjs.send(
+        "service_9u75utg",
+        "template_d86uz0a",
+        {
+          name: name,
+          email: email,
+          message: message,
+        }
+      );
 
       showNote("Message sent successfully!", "success");
 
